@@ -222,6 +222,47 @@ if (slider) {
   }
 
   startAutoSlide();
+
+  // Touch swipe support (Mobile screens ke liye)
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  slider.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
+
+  slider.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+      const swipeThreshold = 50; // kam az kam 50px ka drag
+
+      if (diff < -swipeThreshold) {
+        nextSlide();
+        resetAutoSlide();
+      } else if (diff > swipeThreshold) {
+        prevSlide();
+        resetAutoSlide();
+      }
+    },
+    { passive: true },
+  );
+
+  // Keyboard navigation (Arrow keys: Left / Right)
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      prevSlide();
+      resetAutoSlide();
+    } else if (e.key === "ArrowRight") {
+      nextSlide();
+      resetAutoSlide();
+    }
+  });
 }
 
 // ---------- Contact Form Validation ----------
