@@ -47,3 +47,62 @@ if (topBtn) {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 }
+
+// ---------- Typing animation ----------
+const typingEl = document.getElementById("typing");
+
+if (typingEl) {
+  const words = JSON.parse(typingEl.dataset.words);
+  let wordIndex = 0;
+  let charIndex = 0;
+  let deleting = false;
+
+  function type() {
+    const word = words[wordIndex];
+    charIndex += deleting ? -1 : 1;
+    typingEl.textContent = word.slice(0, charIndex);
+
+    let delay = deleting ? 60 : 120;
+
+    if (!deleting && charIndex === word.length) {
+      deleting = true;
+      delay = 1200; // poora word likh kar thora ruko
+    } else if (deleting && charIndex === 0) {
+      deleting = false;
+      wordIndex = (wordIndex + 1) % words.length;
+      delay = 300;
+    }
+    setTimeout(type, delay);
+  }
+  type();
+}
+
+// ---------- Animated counters ----------
+const counters = document.querySelectorAll(".stat-number");
+
+if (counters.length) {
+  const animate = (el) => {
+    const target = Number(el.dataset.target);
+    const suffix = el.dataset.suffix || "";
+    const duration = 1500;
+    const start = performance.now();
+
+    function step(now) {
+      const progress = Math.min((now - start) / duration, 1);
+      el.textContent = Math.floor(progress * target) + (progress === 1 ? suffix : "");
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  };
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        animate(entry.target);
+        obs.unobserve(entry.target); // sirf aik baar chale
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach((c) => observer.observe(c));
+}
