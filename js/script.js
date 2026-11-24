@@ -89,20 +89,24 @@ if (counters.length) {
 
     function step(now) {
       const progress = Math.min((now - start) / duration, 1);
-      el.textContent = Math.floor(progress * target) + (progress === 1 ? suffix : "");
+      el.textContent =
+        Math.floor(progress * target) + (progress === 1 ? suffix : "");
       if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   };
 
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        animate(entry.target);
-        obs.unobserve(entry.target); // sirf aik baar chale
-      }
-    });
-  }, { threshold: 0.5 });
+  const observer = new IntersectionObserver(
+    (entries, obs) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animate(entry.target);
+          obs.unobserve(entry.target); // sirf aik baar chale
+        }
+      });
+    },
+    { threshold: 0.5 },
+  );
 
   counters.forEach((c) => observer.observe(c));
 }
@@ -121,7 +125,9 @@ faqItems.forEach((item) => {
     faqItems.forEach((other) => {
       other.classList.remove("open");
       other.querySelector(".faq-answer").style.maxHeight = null;
-      other.querySelector(".faq-question").setAttribute("aria-expanded", "false");
+      other
+        .querySelector(".faq-question")
+        .setAttribute("aria-expanded", "false");
     });
 
     if (!isOpen) {
@@ -131,3 +137,89 @@ faqItems.forEach((item) => {
     }
   });
 });
+
+// ---------- Image / Project Slider ----------
+const slider = document.getElementById("portfolio-slider");
+
+if (slider) {
+  const slides = slider.querySelectorAll(".slide");
+  const prevBtn = document.getElementById("slider-prev");
+  const nextBtn = document.getElementById("slider-next");
+  const dotsContainer = document.getElementById("slider-dots");
+  let currentIndex = 0;
+  let autoSlideTimer = null;
+
+  // Dots create karein
+  slides.forEach((_, idx) => {
+    const dot = document.createElement("button");
+    dot.classList.add("dot");
+    if (idx === 0) dot.classList.add("active");
+    dot.setAttribute("aria-label", `Slide ${idx + 1}`);
+    dot.addEventListener("click", () => {
+      goToSlide(idx);
+      resetAutoSlide();
+    });
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = dotsContainer.querySelectorAll(".dot");
+
+  function goToSlide(index) {
+    if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+
+    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle("active", idx === currentIndex);
+    });
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener("click", () => {
+      nextSlide();
+      resetAutoSlide();
+    });
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", () => {
+      prevSlide();
+      resetAutoSlide();
+    });
+  }
+
+  // 5 seconds baad auto change ho
+  function startAutoSlide() {
+    autoSlideTimer = setInterval(nextSlide, 5000);
+  }
+
+  function resetAutoSlide() {
+    clearInterval(autoSlideTimer);
+    startAutoSlide();
+  }
+
+  // Mouse hover karne par auto-slide pause ho jaye
+  const sliderWrapper = slider.closest(".slider-wrapper");
+  if (sliderWrapper) {
+    sliderWrapper.addEventListener("mouseenter", () =>
+      clearInterval(autoSlideTimer),
+    );
+    sliderWrapper.addEventListener("mouseleave", startAutoSlide);
+  }
+
+  startAutoSlide();
+}
