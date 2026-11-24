@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gharsaz | Ghar ka har kaam, hum banayein</title>
+    <script>
+      try {
+        const t = localStorage.getItem("theme");
+        if (t) document.documentElement.setAttribute("data-theme", t);
+      } catch (e) {}
+    </script>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="container nav-inner">
+        <a href="index.html" class="logo">Ghar<span>saz</span></a>
+
+        <nav id="nav-menu" class="nav-links">
+          <a href="index.html" class="active">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="nav-actions">
+          <button id="theme-toggle" aria-label="Dark mode toggle">🌙</button>
+          <button id="menu-toggle" aria-label="Menu" aria-expanded="false">
+            ☰
+          </button>
+        </div>
+      </div>
+    </header>
+    <button id="scroll-top" aria-label="Upar jaayein">↑</button>
+    <script src="js/script.js"></script>
+  </body>
+</html>
