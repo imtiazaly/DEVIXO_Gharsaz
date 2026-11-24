@@ -223,3 +223,108 @@ if (slider) {
 
   startAutoSlide();
 }
+
+// ---------- Contact Form Validation ----------
+const contactForm = document.getElementById("contact-form");
+
+if (contactForm) {
+  const nameInput = document.getElementById("name");
+  const phoneInput = document.getElementById("phone");
+  const serviceInput = document.getElementById("service");
+  const messageInput = document.getElementById("message");
+  const successBox = document.getElementById("form-success");
+
+  function showError(input, errorElId, message) {
+    input.classList.add("invalid");
+    const errorEl = document.getElementById(errorElId);
+    if (errorEl) errorEl.textContent = message;
+  }
+
+  function clearError(input, errorElId) {
+    input.classList.remove("invalid");
+    const errorEl = document.getElementById(errorElId);
+    if (errorEl) errorEl.textContent = "";
+  }
+
+  // Live validation jab user type kare
+  nameInput.addEventListener("input", () =>
+    clearError(nameInput, "name-error"),
+  );
+  phoneInput.addEventListener("input", () =>
+    clearError(phoneInput, "phone-error"),
+  );
+  serviceInput.addEventListener("change", () =>
+    clearError(serviceInput, "service-error"),
+  );
+  messageInput.addEventListener("input", () =>
+    clearError(messageInput, "message-error"),
+  );
+
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    // 1. Name Check
+    const nameVal = nameInput.value.trim();
+    if (nameVal.length < 3) {
+      showError(
+        nameInput,
+        "name-error",
+        "Baraye meharbani mukammal naam darj karein (kam az kam 3 huroof).",
+      );
+      isValid = false;
+    } else {
+      clearError(nameInput, "name-error");
+    }
+
+    // 2. Phone Check (Pakistani format: 03001234567)
+    const phoneVal = phoneInput.value.trim().replace(/[\s-]/g, "");
+    const phoneRegex = /^03\d{9}$/;
+    if (!phoneRegex.test(phoneVal)) {
+      showError(
+        phoneInput,
+        "phone-error",
+        "Sahih 11-hanso ka phone number darj karein (maslan: 03001234567).",
+      );
+      isValid = false;
+    } else {
+      clearError(phoneInput, "phone-error");
+    }
+
+    // 3. Service Check
+    if (!serviceInput.value) {
+      showError(
+        serviceInput,
+        "service-error",
+        "Baraye meharbani kisi aik service ka intikhab karein.",
+      );
+      isValid = false;
+    } else {
+      clearError(serviceInput, "service-error");
+    }
+
+    // 4. Message Check
+    const msgVal = messageInput.value.trim();
+    if (msgVal.length < 10) {
+      showError(
+        messageInput,
+        "message-error",
+        "Apne masle ya patay ki thori tafseel darj karein (kam az kam 10 huroof).",
+      );
+      isValid = false;
+    } else {
+      clearError(messageInput, "message-error");
+    }
+
+    // Agar form valid ho
+    if (isValid) {
+      successBox.style.display = "block";
+      contactForm.reset();
+
+      // 6 seconds baad success alert gayab ho jaye
+      setTimeout(() => {
+        successBox.style.display = "none";
+      }, 6000);
+    }
+  });
+}

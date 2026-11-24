@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contact | Gharsaz</title>
+    <title>Contact Us | Gharsaz</title>
     <script>
       try {
         const t = localStorage.getItem("theme");
@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
+    <!-- Navbar -->
     <header class="navbar">
       <div class="container nav-inner">
         <a href="index.html" class="logo">Ghar<span>saz</span></a>
@@ -33,6 +34,175 @@
         </div>
       </div>
     </header>
+
+    <main>
+      <!-- Page Header -->
+      <section class="page-header">
+        <div class="container">
+          <h1>Ham Se Rabta Karein</h1>
+          <p>
+            Koi bhi masla ho ya service book karni ho, form bharein ya direct
+            call karein.
+          </p>
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="section">
+        <div class="container contact-grid">
+          <!-- Left: Contact Details -->
+          <div class="contact-info">
+            <h2>Kahin Bhi, Kabhi Bhi Rabta Karein</h2>
+            <p class="contact-intro">
+              Hamari team haftay ke 7 din aapki khidmat ke liye dastyab hai.
+              Form bhariye, hamare numainde 15 minute mein call karenge.
+            </p>
+
+            <div class="info-items">
+              <div class="info-item">
+                <span class="info-icon">📞</span>
+                <div>
+                  <h4>Phone / WhatsApp</h4>
+                  <p>0300 1234567 / 042 3555555</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-icon">✉️</span>
+                <div>
+                  <h4>Email</h4>
+                  <p>support@gharsaz.pk</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-icon">📍</span>
+                <div>
+                  <h4>Office Address</h4>
+                  <p>Suit 402, Al-Hafeez Heights, Gulberg III, Lahore</p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <span class="info-icon">⏰</span>
+                <div>
+                  <h4>Aukaat-e-Kaar</h4>
+                  <p>Peer ta Itwaar: 8:00 AM – 10:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Contact Form -->
+          <div class="contact-card">
+            <h3>Service Booking Form</h3>
+            <p class="form-subtitle">
+              Form submit karein aur hum fori rabta karenge.
+            </p>
+
+            <form id="contact-form" novalidate>
+              <!-- Success Banner -->
+              <div
+                id="form-success"
+                class="form-alert success"
+                style="display: none"
+              >
+                ✅ Shukriya! Aapka message daryaft ho gaya hai. Hamari team
+                foran rabta karegi.
+              </div>
+
+              <!-- Full Name Field -->
+              <div class="form-group">
+                <label for="name"
+                  >Aapka Pura Naam <span class="req">*</span></label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Maslan: Ali Ahmed"
+                />
+                <span class="error-msg" id="name-error"></span>
+              </div>
+
+              <!-- Phone Field -->
+              <div class="form-group">
+                <label for="phone"
+                  >Phone Number <span class="req">*</span></label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Maslan: 03001234567"
+                />
+                <span class="error-msg" id="phone-error"></span>
+              </div>
+
+              <!-- Service Type Field -->
+              <div class="form-group">
+                <label for="service"
+                  >Service Ka Intikhab Karein <span class="req">*</span></label
+                >
+                <select id="service" name="service">
+                  <option value="">-- Service Chunein --</option>
+                  <option value="bijli">Bijli ka Kaam (Electrician)</option>
+                  <option value="plumbing">Plumbing (Nal, Tanki, Pipe)</option>
+                  <option value="ac">AC Repair & Service</option>
+                  <option value="safai">Deep Cleaning (Safai)</option>
+                  <option value="paint">Rang o Roghan (Paint)</option>
+                  <option value="carpenter">Carpenter (Woodwork)</option>
+                </select>
+                <span class="error-msg" id="service-error"></span>
+              </div>
+
+              <!-- Message Field -->
+              <div class="form-group">
+                <label for="message"
+                  >Kaam Ki Tafseel / Pata <span class="req">*</span></label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Apne masle ya patay ki mukhtasir tafseel likhein..."
+                ></textarea>
+                <span class="error-msg" id="message-error"></span>
+              </div>
+
+              <!-- Submit Button -->
+              <button type="submit" class="btn btn-accent form-btn">
+                Request Bhejein
+              </button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container footer-grid">
+        <div>
+          <a href="index.html" class="logo">Ghar<span>saz</span></a>
+          <p class="footer-text">Ghar ka har kaam, hum banayein.</p>
+        </div>
+        <div>
+          <h4>Links</h4>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div>
+          <h4>Rabta</h4>
+          <p>Phone: 0300 0000000</p>
+          <p>Email: info@gharsaz.com</p>
+        </div>
+      </div>
+      <p class="copyright">© 2026 Gharsaz. Tamam haqooq mehfooz hain.</p>
+    </footer>
+
     <button id="scroll-top" aria-label="Upar jaayein">↑</button>
     <script src="js/script.js"></script>
   </body>
