@@ -39,7 +39,7 @@ This project strictly adheres to and fulfills all requirements outlined in the *
 
 ---
 
-## ⚡ Senior Engineering Highlights
+## ⚡ Engineering Highlights
 
 * **Pure Native Performance:** Built with zero runtime frameworks or external UI dependencies, ensuring instantaneous load times and 100/100 Core Web Vitals readiness.
 * **FOUC Prevention:** Dark/Light theme state is executed inline before the browser renders the DOM, preventing screen flickering on page transitions.
